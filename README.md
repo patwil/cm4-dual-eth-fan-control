@@ -33,7 +33,22 @@ WiringPi can output _copious_ debug info by setting WIRINGPI_DEBUG environment v
 # Device-Tree additions needed for WiringPi on CM4
 
 WiringPi will not run on CM4 or CM5 as the Model and Revision info is not displayed in ```/proc/cpuinfo```; neither is this info
-available in device tree, because ```/proc/device-tree/system/linux,revision``` doesn't exist. Here is a way to populate Model Revision
+available in device tree, because ```/proc/device-tree/system/linux,revision``` doesn't exist.
+```
+$ sudo ./blink
+Raspberry Pi blink
+Oops: Unable to determine Raspberry Pi board revision from /proc/device-tree/system/linux,revision and from /proc/cpuinfo
+      WiringPi    : 3.16
+      system name : Linux
+      release     : 6.16.7-1-aarch64-ARCH
+      version     : #1 SMP PREEMPT_DYNAMIC Mon Sep 15 09:42:38 MDT 2025
+      machine     : aarch64
+ -> No "Revision" line
+ -> WiringPi is designed for Raspberry Pi and can only be used with a Raspberry Pi.
+
+ -> Check at https://github.com/wiringpi/wiringpi/issues.
+```
+Here is a way to populate Model Revision
 and Serial Number at boot time with some minor changes. There are probably many better ways of achieving the same result,
 but this works for now.
 
