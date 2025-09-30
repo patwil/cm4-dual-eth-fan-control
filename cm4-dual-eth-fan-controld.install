@@ -1,0 +1,25 @@
+
+pre-install() {
+  echo "==> Check we have everything in place to run cm4-dual-eth-fan-controld.service"
+  python ${srcdir}/check_modules.py
+}
+
+post_install() {
+  echo "==> Enabling and starting cm4-dual-eth-fan-controld.service"
+  systemctl enable --now cm4-dual-eth-fan-controld.service >/dev/null 2>&1 || true
+}
+
+post_upgrade() {
+  echo "==> Restarting cm4-dual-eth-fan-controld.service"
+  systemctl try-restart cm4-dual-eth-fan-controld.service >/dev/null 2>&1 || true
+}
+
+pre_remove() {
+  echo "==> Stopping cm4-dual-eth-fan-controld.service"
+  systemctl stop cm4-dual-eth-fan-controld.service >/dev/null 2>&1 || true
+}
+
+post_remove() {
+  echo "==> Disabling cm4-dual-eth-fan-controld.service"
+  systemctl disable cm4-dual-eth-fan-controld.service >/dev/null 2>&1 || true
+}
