@@ -41,9 +41,9 @@ if not has_wpi_lib_installed:
 	sys.stderr.write('\033[91m\033[1m') # Red Bold
 	sys.stderr.write('Cannot find any of the following WiringPi libraries:\n')
 	for lib in WiringPi_libnames:
-		sys.stderr.write(f'    {lib}\n')
+		sys.stderr.write(f'	   {lib}\n')
 	for lib in WiringPi_libfilenames:
-		sys.stderr.write(f'    {lib}\n')
+		sys.stderr.write(f'	   {lib}\n')
 	sys.stderr.write('\033[0m') # reset to normal
 	sys.stderr.write('\033[91m') # Red
 	sys.stderr.write('It looks as though WiringPi has not been installed (correctly).')
