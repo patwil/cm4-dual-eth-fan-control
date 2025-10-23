@@ -4,41 +4,11 @@
 Check if required modules are installed for fan-control program to run.
 '''
 
-try:
-	import importlib
-except ImportError:
-	print('Error trying to import importlib.')
-	exit(1)
-	
-try:
-	import sys
-except ImportError:
-	print('Error trying to import sys.')
-	exit(1)
-	
-required_modules = ['ctypes', 'time', 'os', 'signal', 'logging']
-
-missing_modules = []
-
-for module in required_modules:
-	try:
-		importlib.import_module(module)
-	except ImportError:
-		missing_modules.append(module)
-
-if len(missing_modules):
-	if len(missing_modules) == 1:
-		sys.stderr.write(f'The following module is missing:\n\t{missing_modules[0]}\n')
-	else:
-		sys.stderr.write(f'The following modules are missing:\n')
-		for missing_module in missing_modules:
-			sys.stderr.write(f'\t{missing_module}\n')
-	exit(1)
-
 import ctypes
 from ctypes import cdll
 from ctypes.util import find_library
 import os
+import sys
 
 
 WiringPi_libnames = ['wiringPi', 'wiringpi']
