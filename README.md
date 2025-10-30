@@ -60,7 +60,7 @@ Add overlay file to create /system/linux,revision and /system/linux,serial to de
 cd /boot
 sudo mkdir overlays || true
 cd overlays
-cat <<xEOFx | sudo tee cm4-boardinfo.dtso >/dev/null
+sudo tee cm4-boardinfo.dtso >/dev/null <<xEOFx
 /dts-v1/;
 /plugin/;
 
@@ -89,7 +89,7 @@ USB port needs DT change to be enabled, so we'll add another overlay while we're
 
 Some systems might use ```"/soc/usb@7e980000"``` instead of xhci, so it's here as a comment, just in case.
 ```console
-cat <<xEOFx | sudo tee cm4-xhci.dtso >/dev/null
+sudo tee cm4-xhci.dtso >/dev/null <<xEOFx
 /dts-v1/;
 /plugin/;
 
@@ -113,7 +113,7 @@ sudo dtc -@ -I dts -o dtb -o cm4-xhci.dtbo cm4-xhci.dtso
 Add following lines to /boot/config.txt to enable USB.
 ```console
 cd /boot
-cat <<xEOFx | sudo tee -a /boot/config.txt >/dev/null
+sudo tee -a /boot/config.txt >/dev/null <<xEOFx
 
 [cm4]
 otg_mode=1
@@ -127,7 +127,7 @@ __Note__ _that u-boot variables have been escaped, i.e. ```${var}``` ===> ```\${
 Remove these if pasting into an editor._
 ```console
 sudo mv /boot.txt /boot.txt.sv
-cat <<xEOFx | sudo tee /boot/boot.txt 
+sudo tee /boot/boot.txt >/dev/null <<xEOFx 
 # After modifying, run ./mkscr
 
 # Set root partition to the second partition of boot device
