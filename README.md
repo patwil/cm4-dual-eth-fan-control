@@ -59,7 +59,7 @@ Add overlay file to create /system/linux,revision and /system/linux,serial to de
 ```console
 cd /boot
 sudo mkdir overlays || true
-cd overlays
+cd overlays &&
 sudo tee cm4-boardinfo.dtso >/dev/null <<xEOFx
 /dts-v1/;
 /plugin/;
@@ -89,6 +89,7 @@ USB port needs DT change to be enabled, so we'll add another overlay while we're
 
 Some systems might use ```"/soc/usb@7e980000"``` instead of xhci, so it's here as a comment, just in case.
 ```console
+cd /boot/overlays &&
 sudo tee cm4-xhci.dtso >/dev/null <<xEOFx
 /dts-v1/;
 /plugin/;
@@ -126,7 +127,7 @@ U-Boot has access to board info, so use it to populate the device-tree.
 __Note__ _that u-boot variables have been escaped, i.e. ```${var}``` ===> ```\${var}``` to prevent their interpretation in this shell script.
 Remove these if pasting into an editor._
 ```console
-sudo mv /boot.txt /boot.txt.sv
+sudo mv /boot/boot.txt /boot/boot.txt.sv
 sudo tee /boot/boot.txt >/dev/null <<xEOFx 
 # After modifying, run ./mkscr
 
